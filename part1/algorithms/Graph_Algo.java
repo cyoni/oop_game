@@ -37,7 +37,7 @@ public class Graph_Algo implements graph_algorithms , Serializable{
 	
 	
 	private static graph g;
-	private String file_name;
+	private String file_name; //TODO
 	private FW fw;
 	
 	@Override
