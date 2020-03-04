@@ -3,7 +3,7 @@ package algorithms;
 
 
 public class math {
-
+ 
 	/**
 	 * This function returns a point somewhere between a line
 	 * @return vector
