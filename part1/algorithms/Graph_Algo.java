@@ -75,33 +75,25 @@ public class Graph_Algo implements graph_algorithms , Serializable{
 
 	@Override
 	public boolean isConnected() {
-		
-
 		Collection<node_data> nodes = g.getV();
 		boolean[] visited = new boolean[g.nodeSize()]; 
 		int parent[] = new int[g.nodeSize()];
-		
 		LinkedList<node_data> queue = new LinkedList<>();
+		node_data[] nodesArray = nodes.toArray(size -> new node_data[size]); 	//	node_data[] nodesArray = nodes.toArray(node_data[]::new);
+		node_data current = nodesArray[0];
 		
-	//	node_data[] nodesArray = nodes.toArray(node_data[]::new);
-		node_data[] nodesArray = nodes.toArray(size -> new node_data[size]);
-				
-			node_data current = nodesArray[0];
 		// Mark the current node as visited and enqueue it 
 			visited[current.getKey()]=true; 
 			queue.add(nodesArray[current.getKey()]); 
 			parent[current.getKey()] = -1;
-			
 			while (queue.size() != 0) 
 			{ 
 				// Dequeue a vertex from queue and print it 
 				current = queue.poll(); 
-			//	System.out.print(current.getKey() +" "); 
-
+				
 				// Get all adjacent vertices of the dequeued vertex s 
 				// If a adjacent has not been visited, then mark it 
 				// visited and enqueue it 
-				
 				 for (edge_data neighbor : g.getE(current.getKey())) { 
 					 int id_of_neighbor = neighbor.getDest(); // source(current) ------> (id_of_neighbor)
 						if (visited[id_of_neighbor]==false) 
@@ -114,9 +106,7 @@ public class Graph_Algo implements graph_algorithms , Serializable{
 				 }
 			
 			} 
-
 			for (boolean what : visited) if (!what) return false;
-			
 		return true;
 	}
 
@@ -129,7 +119,6 @@ public class Graph_Algo implements graph_algorithms , Serializable{
 
 	@Override
 	public List<node_data> shortestPath(int src, int dest) {
-	
 		return fw.getShortestPath(src, dest);
 	}
 
@@ -157,9 +146,4 @@ public class Graph_Algo implements graph_algorithms , Serializable{
 		}
 		return null;
 	}
-	
-   
-
-
-
 }

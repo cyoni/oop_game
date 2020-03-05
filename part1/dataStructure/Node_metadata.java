@@ -8,8 +8,10 @@ import utils.Point3D;
 public class Node_metadata implements node_data, Serializable {
 
 	/**
-	 * 
+	 * This class contains data of a node.
+	 * @author Yoni
 	 */
+	
 	private static final long serialVersionUID = -5098381326948746081L;
 	private double weight;
 	private Point3D location;

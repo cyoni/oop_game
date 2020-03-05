@@ -15,6 +15,7 @@ public class FW implements Serializable{
 	/**
 	 * 
 	 */
+	
 	private static final long serialVersionUID = -731345878701854509L;
 	private int infinity = Integer.MAX_VALUE;
 	private double mat[][];
@@ -27,21 +28,14 @@ public class FW implements Serializable{
 		initMat();
 	}       
 	
-	
 
 	@SuppressWarnings("unchecked")
 	private void initMat() {
-		
 		mat = new double[g.nodeSize()][g.nodeSize()];
 		paths = new ArrayList[g.nodeSize()][g.nodeSize()];
-
 		for (double[] row : mat)  Arrays.fill(row, infinity);
 		
-		
-
-			
-		Collection<node_data> nodes = g.getV();
-				
+		Collection<node_data> nodes = g.getV();	
 		// Initialize the mat with adjacent vertices 
 		for (node_data current_node : nodes) {
 			int i = current_node.getKey();
@@ -69,7 +63,6 @@ public class FW implements Serializable{
 		startFW();
 		// correct the mat with the weights of the vertices:
 		correctMatrix();
-		
 		printMat();
 	}
 	
@@ -115,7 +108,6 @@ public class FW implements Serializable{
 						if (mat[i][j] > mat[i][k] + mat[k][j]){
 							mat[i][j] = mat[i][k] + mat[k][j];
 							paths[i][j].clear();
-							
 							paths[i][j].addAll(paths[i][k]);
 							paths[i][j].addAll(paths[k][j]);
 						}
@@ -132,9 +124,7 @@ public class FW implements Serializable{
 
 
 	public List<node_data> getShortestPath(int src, int dest) {
-		
 		ArrayList<node_data> shortestPath = paths[src][dest];
-		
 		return shortestPath; 
 	}
 
@@ -142,12 +132,9 @@ public class FW implements Serializable{
 
 	// remove duplicates
 	private List<node_data> shortestPath_without_duplicates(List<node_data> shortestPath) {
-
 		List<node_data> shortestPath_without_duplicates = new ArrayList<>();
-		
 		int visited[] = new int[g.nodeSize()];
 		Arrays.fill(visited, -1);
-		
     	for (int i=0; i< shortestPath.size(); i++) {
     		int key = shortestPath.get(i).getKey();
     		if (visited[key] == 1) continue;
@@ -161,33 +148,19 @@ public class FW implements Serializable{
 
 	public List<node_data> getShortestPathWithTarget(List<Integer> targets) {
 		List<node_data> list = new ArrayList<>();
-		
 		if (targets.isEmpty()) {System.out.println("targets list is empty"); return null;}
-		
-		
 		node_data arr[] = new node_data[targets.size()];
-
 		for (int i = 0; i < arr.length; i++) {
 			arr[i] = g.getNode(targets.get(i));
 		}
-		
 		node_data leader_node = arr[0];  // get the first node in the list
-		
-		//if (targets.size() == 2) {list.add(arr[0]); list.add(arr[1]); return list;}
-		
 		for (int i=1; i< arr.length; i++) {
 		List<node_data> shorestPathList = getShortestPath(leader_node.getKey(), arr[i].getKey());
-		
-		//System.out.println(leader_node.getKey() + "---" + arr[i].getKey());
-		
 		list.addAll(shorestPathList);
-		
 			for (int j = 1; j < shorestPathList.size() ; j++) {
 			mat[shorestPathList.get(j).getKey()][shorestPathList.get(j-1).getKey()] = 0;
 			mat[shorestPathList.get(j-1).getKey()][shorestPathList.get(j).getKey()] = 0;
 			}
-			
-			
 			convertVertexToEdge();
 			// update the mat with FW
 			startFW();

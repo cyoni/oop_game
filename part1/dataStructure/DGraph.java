@@ -63,7 +63,6 @@ public class DGraph implements graph, Serializable {
 
 	@Override
 	public Collection<node_data> getV() {
-			
 		return (Collection<node_data>) g.values() ;
 	}
 
@@ -75,19 +74,11 @@ public class DGraph implements graph, Serializable {
 	@Override
 	public node_data removeNode(int key) {
 		List<edge_data> old_node_edges = e.get(key);
-		
 		g.remove(key); // remove the node
-		e.remove(key); //  remove its edges
-		
-
-		System.out.println(e.get(4).get(0).getDest() + " !");
-	
-		
+		e.remove(key); //  remove its edges	
 		for (edge_data edge : old_node_edges) { // remove the edges that connect with him from his neighbors 
 			int dest = edge.getDest();
-					
 			List<edge_data> l = e.get(dest); 
-			
 			for (int i=0; i< l.size(); i++) {
 				edge_data edge_to_check = l.get(i);
 				if (edge_to_check.getDest() == key)   {e.get(dest).remove(edge_to_check); i--;} 
@@ -100,7 +91,6 @@ public class DGraph implements graph, Serializable {
 	public edge_data removeEdge(int src, int dest) {
 		e.remove(src);
 		e.remove(dest);
-
 		return null;
 	}
 

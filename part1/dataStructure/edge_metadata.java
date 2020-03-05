@@ -5,12 +5,13 @@ import java.io.Serializable;
 public class edge_metadata implements edge_data, Serializable {
 
 	/**
-	 * 
+	 * This class contains information about an edge.
 	 */
 
 	private static final long serialVersionUID = 4269760787650059514L;
 	private double weight;
-	private int src, dest;
+	private int src, dest, tempData;
+	private String info;
 	
 	public edge_metadata(int x, int y, double weight) {
 		src = x;
@@ -35,26 +36,23 @@ public class edge_metadata implements edge_data, Serializable {
 
 	@Override
 	public String getInfo() {
-		// TODO Auto-generated method stub
-		return null;
+		return info;
 	}
 
 	@Override
 	public void setInfo(String s) {
-		// TODO Auto-generated method stub
+		this.info = s;
 		
 	}
 
 	@Override
 	public int getTag() {
-		// TODO Auto-generated method stub
-		return 0;
+		return tempData;
 	}
 
 	@Override
 	public void setTag(int t) {
-		// TODO Auto-generated method stub
-		
+		this.tempData = t;
 	}
 
 }
