@@ -29,7 +29,7 @@ public class Graph_draw {
     	Graph_Algo a = new Graph_Algo();
     	a.init(myGraph);
 		StdDraw.setCanvasSize(500, 500);
-		StdDraw.setScale(0, 100);
+		StdDraw.setScale(0, 1000);
 		StdDraw.setFont(new Font("Arial", 10, 15));
 		Collection<node_data> my_nodes = myGraph.getV();
 		for (node_data i : my_nodes) {
